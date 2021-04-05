@@ -19,10 +19,34 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="demo1.cpp" />
+    <ClCompile Include="demo10.cpp" />
+    <ClCompile Include="demo11.cpp" />
+    <ClCompile Include="demo12.cpp" />
+    <ClCompile Include="demo13.cpp" />
+    <ClCompile Include="demo2.cpp" />
+    <ClCompile Include="demo3.cpp" />
+    <ClCompile Include="demo4.cpp" />
+    <ClCompile Include="demo5.cpp" />
+    <ClCompile Include="demo6.cpp" />
+    <ClCompile Include="demo7.cpp" />
+    <ClCompile Include="demo8.cpp" />
+    <ClCompile Include="demp9.cpp" />
+    <ClCompile Include="document_scanner.cpp" />
+    <ClCompile Include="doc_sca_cam.cpp" />
+    <ClCompile Include="License_Plate_Detector.cpp" />
     <ClCompile Include="实验1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.MD" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="二值参数的分段线性化灰度图像.jpg" />
+    <Image Include="原视彩色RGB图像.jpg" />
+    <Image Include="灰度图像.jpg" />
+    <Image Include="灰度图像直方图.jpg" />
+    <Image Include="直方图均衡化灰度图像.jpg" />
+    <Image Include="直方图均衡化灰度图像直方图.jpg" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
