@@ -26,7 +26,7 @@ void showHistogram(Mat img,string window);
 //仅能显示灰度图像的直方图 size [800X600]比较合适
 int main(int argc,char** argv)
 {
-	string path = "Resources/testimg.jpg";
+	string path = "Resources/smile.jpg";
 	//图片路径 相对路径
 	Mat img = imread(path);
 	//读取图片内容

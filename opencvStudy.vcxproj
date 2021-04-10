@@ -19,9 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="实验1.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="README.MD" />
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +28,9 @@
     <Image Include="灰度图像直方图.jpg" />
     <Image Include="直方图均衡化灰度图像.jpg" />
     <Image Include="直方图均衡化灰度图像直方图.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="makeChessP.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
