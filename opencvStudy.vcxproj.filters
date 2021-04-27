@@ -40,7 +40,7 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="makeChessP.cpp">
+    <ClCompile Include="实验二.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
