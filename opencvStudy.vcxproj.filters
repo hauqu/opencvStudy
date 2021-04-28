@@ -18,6 +18,12 @@
     <None Include="README.MD">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="实验2.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="实验1.md">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="二值参数的分段线性化灰度图像.jpg">

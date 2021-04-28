@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="README.MD" />
+    <None Include="实验1.md" />
+    <None Include="实验2.md" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="二值参数的分段线性化灰度图像.jpg" />
