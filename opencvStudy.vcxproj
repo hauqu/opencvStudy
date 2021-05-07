@@ -22,6 +22,7 @@
     <None Include="README.MD" />
     <None Include="实验1.md" />
     <None Include="实验2.md" />
+    <None Include="实验3.md" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="二值参数的分段线性化灰度图像.jpg" />
@@ -32,6 +33,7 @@
     <Image Include="直方图均衡化灰度图像直方图.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="实验3.cpp" />
     <ClCompile Include="实验二.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

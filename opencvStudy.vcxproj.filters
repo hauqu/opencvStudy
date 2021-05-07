@@ -24,6 +24,9 @@
     <None Include="实验1.md">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="实验3.md">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="二值参数的分段线性化灰度图像.jpg">
@@ -47,6 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="实验二.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="实验3.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
