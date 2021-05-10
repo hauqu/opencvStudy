@@ -49,9 +49,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="实验二.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="实验3.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
