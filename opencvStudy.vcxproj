@@ -23,6 +23,7 @@
     <None Include="实验1.md" />
     <None Include="实验2.md" />
     <None Include="实验3.md" />
+    <None Include="实验4.md" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="二值参数的分段线性化灰度图像.jpg" />
