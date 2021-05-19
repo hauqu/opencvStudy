@@ -34,7 +34,7 @@
     <Image Include="直方图均衡化灰度图像直方图.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="实验3.cpp" />
+    <ClCompile Include="实验4_2.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
