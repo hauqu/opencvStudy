@@ -166,10 +166,10 @@ void dilation_histogram_equalization(Mat imgGray)
 	
 }
 
-void showHistogram(Mat img,string window)
+void showHistogram(Mat img, string window)
 {
 	// 0-255
-	vector<int>rk(256,0);
+	vector<int>rk(256, 0);
 	for (int i = 0; i < img.rows; i++)
 	{
 		for (int j = 0; j < img.cols; j++)
@@ -183,14 +183,24 @@ void showHistogram(Mat img,string window)
 	{
 		(*i) = (*i) / 10;
 	}//数据过大，除以10 后处理
-	
-	Mat imgH(800, 256*4, CV_8UC3, Scalar(64, 64, 64));//创建一个图像
+
+	Mat imgH(800, 256 * 4, CV_8UC3, Scalar(64, 64, 64));//创建一个图像
 	putText(imgH, window, Point(400, 100), FONT_HERSHEY_DUPLEX, 2, Scalar(0, 0, 128), 2);
 	for (int i = 0; i < rk.size(); i++)
 	{
 		//绘制直线加顶端圆做出直方图效果
-		line(imgH, Point(i * 4, 800), Point(i * 4, 800 - rk[i]),Scalar(255,0,0));
-		circle(imgH, Point(i *4,800-rk[i]), 3, Scalar(255, 255, 0),FILLED);
+		line(imgH, Point(i * 4, 800), Point(i * 4, 800 - rk[i]), Scalar(255, 0, 0));
+		circle(imgH, Point(i * 4, 800 - rk[i]), 3, Scalar(255, 255, 0), FILLED);
+		if (i % 10 == 0)
+		{
+			line(imgH, Point(i * 4, 0), Point(i * 4, 800 - rk[i]), Scalar(0, 125, 0));
+		}
+		if (i % 50 == 0)
+		{
+			line(imgH, Point(i * 4, 0), Point(i * 4, 800 - rk[i]), Scalar(125, 0, 0));
+			putText(imgH, to_string(i), Point(i * 4 - 25, 20), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 255, 0));
+		}
+
 	}
 	imshow(window, imgH);
 	//显示图像
