@@ -15,20 +15,22 @@ using namespace cv;
 void OptimSegmentation(unsigned char* inputimage, int height, int width);
 void showHistogram(Mat img, string window);
 
+Mat img,imgGray;
 int main()
 {
-    Mat img1 = imread("Resources/jimu_singlecolor.jpg");
+   img = imread("Resources/jimu_singlecolor.jpg");
+    
+    cvtColor(img, imgGray, COLOR_RGB2GRAY);
    
-    cvtColor(img1, img1, COLOR_RGB2GRAY);
-    showHistogram(img1, "H");
-    int height = img1.rows;
-    int width = img1.cols;
+    showHistogram(imgGray, "H");
+    int height = imgGray.rows;
+    int width = imgGray.cols;
     uchar* covertimage = new uchar[height * width];
     uchar* p;
     int i, j;
     for (i = 0; i < height; i++)
     {
-        p = img1.ptr<uchar>(i);
+        p = imgGray.ptr<uchar>(i);
         for (j = 0; j < width; j++)
         {
             covertimage[i * width + j] = p[j];
