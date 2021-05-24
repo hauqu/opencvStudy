@@ -52,7 +52,7 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="实验4_2.cpp">
+    <ClCompile Include="实验4_3.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

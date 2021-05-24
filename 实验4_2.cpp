@@ -17,24 +17,24 @@ Mat img, imgGray, img1;
 
 void showHistogram(Mat img, string window);
 void threshold_segmentation_otsu(Mat scr, Mat& dst,vector<int>MT);
+//翻车了，采用opencv自带的分割进行测试
+void threshold_segmentation1(Mat scr, Mat& dst, short T);
+
 //固定阈值
 int main()
 {
-	string path = "Resources/ta.jpg";
+	string path = "Resources/jimu_singlecolor.jpg";
 	img = imread(path);
 	cvtColor(img, imgGray, COLOR_BGR2GRAY);
-	//GaussianBlur(imgGray, imgGray, Size(1, 1), 0.5);
+	GaussianBlur(imgGray, imgGray, Size(1, 1), 0.5);
 	
 	showHistogram(imgGray, "h");
+	//vector<int>tt = { 50 ,100};
 
-	
-
-
-	
-		
-
+	//threshold_segmentation_otsu(imgGray, img1, tt);
+	threshold(imgGray, img1, 0, 255, THRESH_OTSU);
 	imshow("gray", imgGray);
-	//imshow("img1", img1);
+	imshow("img1", img1);
 	waitKey(0);
 	
 	return 0;
@@ -42,100 +42,123 @@ int main()
 
 void threshold_segmentation_otsu(Mat scr, Mat& dst, vector<int>MT)
 {
-	scr.copyTo(dst);
+
+	//一个阈值
 	int N = scr.rows * scr.cols;
 	const int L = 256;
 	int M = MT.size();
-
-	vector<int>Ni(0, L);//0-255 灰度阶
 	
-	vector<double>Wk(0.0, L);
-	vector<int>t_Wk(0, L);
+	vector<double>OWS(0.0,MT[0]);
+	scr.copyTo(dst);
+	int time = MT[0];
 
-	vector<double>Uk(0.0, L);
-	vector<int>t_Uk(0, L);
-
-	
-	vector<double>Wj(0.0, M);
-	vector<double>Uj(0.0, M);
-
-	int WT = 1;
-	double UT =0.0;
-	vector<double>Oj2(0.0, M);
-
-	double OW2 = 0.0;
-	double OB2 = 0.0;
-
-	//计算Ni
-	for (int i = 0; i < scr.rows; i++)
+	while (time != 255)
 	{
-		for (int j = 0; j < scr.cols; j++)
+
+		vector<int>Ni(0, L);//0-255 灰度阶
+
+		vector<double>Wk(0.0, L);
+		vector<int>t_Wk(0, L);
+
+		vector<double>Uk(0.0, L);
+		vector<int>t_Uk(0, L);
+
+
+		vector<double>Wj(0.0, M);
+		vector<double>Uj(0.0, M);
+
+		int WT = 1;
+		double UT = 0.0;
+		vector<double>Oj2(0.0, M);
+
+		//类间方差
+		double OW2 = 0.0;
+		double OB2 = 0.0;
+
+		//计算Ni
+		for (int i = 0; i < scr.rows; i++)
 		{
-			short temp = (short)scr.at<uchar>(i, j);
-			Ni[temp]++;
+			for (int j = 0; j < scr.cols; j++)
+			{
+				short temp = (short)scr.at<uchar>(i, j);
+				Ni[temp]++;
+			}
 		}
-	}
 
-	//计算w（k）
-	t_Wk[0] = Ni[0];
-	Wk[0] = (double)t_Wk[0] / N;
-	for (int i = 1; i < L; i++)
-	{
-		t_Wk[i] = t_Wk[i - 1] + Ni[i];
-		Wk[i] = (double)t_Wk[i] / N;
-	}
-
-	//计算u（k）
-	t_Uk[0] = 0;
-	Uk[0] = 0.0;
-	for (int i = 1; i < L; i++)
-	{
-		t_Uk[i]=i*Ni[i] +t_Uk[i-1];
-		Uk[i] = t_Uk[i] / N;
-	}
-
-	
-	/*
-	w(-1) =0
-	U(-1) =0;
-	
-	*/
-	//计算Wj
-	Wj[0] = Wk[MT[0]];
-	for (int j = 1; j < M; j++)
-	{
-		Wj[j] = Wk[MT[j]] - Wk[MT[j - 1]];
-	}
-
-	//计算Uj
-
-	Uj[0] = Uk[MT[0]] / Wj[0];
-	for (int j = 1; j < M; j++)
-	{
-		Uj[j]= (Uk[MT[j]] - Uk[MT[j - 1]])/Wj[j];
-	}
-	 
-	//计算 Oj^2
-	for (int j = 0; j < M; j++)
-	{
-		
-		for (int i = MT[j-1]+1; i < MT[j]; i++)
+		//计算w（k）
+		t_Wk[0] = Ni[0];
+		Wk[0] = (double)t_Wk[0] / N;
+		for (int i = 1; i < L; i++)
 		{
-			Oj2[j] +=(i - Uj[j])* (i - Uj[j])* ((double)Ni[i] / N)/Wj[j];
+			t_Wk[i] = t_Wk[i - 1] + Ni[i];
+			Wk[i] = (double)t_Wk[i] / N;
 		}
-	}
 
-	//计算UT
+		//计算u（k）
+		t_Uk[0] = 0;
+		Uk[0] = 0.0;
+		for (int i = 1; i < L; i++)
+		{
+			t_Uk[i] = i * Ni[i] + t_Uk[i - 1];
+			Uk[i] = t_Uk[i] / N;
+		}
 
-	for (int j = 0; j < M; j++)
-	{
-		UT+= Wj[j] * Uj[j];
+
+		/*
+		w(-1) =0
+		U(-1) =0;
+
+		*/
+		//计算Wj
+		Wj[0] = Wk[MT[0]];
+		for (int j = 1; j < M; j++)
+		{
+			Wj[j] = Wk[MT[j]] - Wk[MT[j - 1]];
+		}
+
+		//计算Uj
+
+		Uj[0] = Uk[MT[0]] / Wj[0];
+		for (int j = 1; j < M; j++)
+		{
+			Uj[j] = (Uk[MT[j]] - Uk[MT[j - 1]]) / Wj[j];
+		}
+
+		//计算 Oj^2
+		for (int j = 0; j < M; j++)
+		{
+
+			for (int i = MT[j - 1] + 1; i < MT[j]; i++)
+			{
+				Oj2[j] += (i - Uj[j]) * (i - Uj[j]) * ((double)Ni[i] / N) / Wj[j];
+			}
+		}
+
+		//计算UT
+
+		for (int j = 0; j < M; j++)
+		{
+			UT += Wj[j] * Uj[j];
+		}
+		//计算 ow^2
+		for (int j = 0; j < M; j++)
+		{
+			OW2 += Wj[j] * Oj2[j];
+		}
+		OWS.push_back(OW2);
+		MT[0]++;
+		time++;
 	}
-	//计算 ow^2
-	for (int j =0; j < M; j++)
+	//
+	double min = OWS[MT[0]];
+	for (int i = MT[0]+1; i < OWS.size(); i++)
 	{
-		OW2+= Wj[j] * Oj2[j];
+		if (OWS[i] < min)
+			min = i;
 	}
+	cout << "OWS min:" << MT[0]<<endl;
+	threshold_segmentation1(scr, dst, MT[0]);
+
 }
 
 void showHistogram(Mat img, string window)
@@ -176,4 +199,23 @@ void showHistogram(Mat img, string window)
 	}
 	imshow(window, imgH);
 	//显示图像
+}
+void threshold_segmentation1(Mat scr, Mat& dst, short T)
+{
+	scr.copyTo(dst);
+	for (int i = 0; i < scr.rows; i++)
+	{
+		for (int j = 0; j < scr.cols; j++)
+		{
+			short temp = (short)scr.at<uchar>(i, j);
+			if (temp <= T)
+			{
+				dst.at<uchar>(i, j) = 0;
+			}
+			else
+			{
+				dst.at<uchar>(i, j) = 255;
+			}
+		}
+	}
 }

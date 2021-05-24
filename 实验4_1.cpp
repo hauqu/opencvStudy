@@ -20,7 +20,7 @@ void threshold_segmentation1(Mat scr, Mat& dst,short T);
 //πÃ∂®„–÷µ
 int main()
 {
-	string path = "Resources/coins.jpg";
+	string path = "Resources/jimu2.jpg";
 	img = imread(path);
 	cvtColor(img, imgGray, COLOR_BGR2GRAY);
 	GaussianBlur(imgGray, imgGray, Size(1, 1), 0.5);
